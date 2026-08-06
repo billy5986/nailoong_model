@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奶龍 3D 模型展示</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Inter', sans-serif;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-weight: 800;
+        }
+
+        model-viewer {
+            width: 90vw;
+            max-width: 800px;
+            height: 65vh;
+            background-color: rgba(255, 255, 255, 0.4);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        .loading-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            background: rgba(255,255,255,0.9);
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>🌟 我的雲端奶龍模型</h1>
+    
+    <!-- 這裡直接使用了你成功部署的直連網址 -->
+    <model-viewer 
+        id="my-model"
+        src="https://billy5986.github.io/model/nailoong/nailoong.glb" 
+        camera-controls 
+        auto-rotate 
+        shadow-intensity="1.5"
+        exposure="1.2"
+        environment-image="neutral">
+        
+        <!-- 當模型還在下載時，會顯示這個進度條/文字 -->
+        <div slot="progress-bar" class="loading-text" id="loading-msg">模型努力載入中... 🚀</div>
+    </model-viewer>
+
+    <script>
+        const modelViewer = document.querySelector('#my-model');
+        const loadingMsg = document.querySelector('#loading-msg');
+
+        // 監聽錯誤事件
+        modelViewer.addEventListener('error', (event) => {
+            console.error('模型載入錯誤:', event);
+            loadingMsg.innerHTML = '⚠️ 模型載入失敗！<br><span style="font-size: 0.8em; font-weight: normal; margin-top: 5px; display: block;">請檢查：1.檔案是否損毀 2.是否直接改副檔名 3.檔案是否太大</span>';
+            loadingMsg.style.color = '#e74c3c'; // 變成紅色警告
+        });
+        
+        // 確保載入完成後隱藏文字
+        modelViewer.addEventListener('load', () => {
+            loadingMsg.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
