@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我是奶龍</title>
+    <title>奶龍 3D 模型展示</title>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
     
     <style>
@@ -55,10 +55,10 @@
     
     <h1>🌟 我是奶龍</h1>
     
-    <!-- 這裡直接使用了你成功部署的直連網址 -->
+    <!-- 改用相對路徑，讓 HTML 去 model 資料夾裡面找模型 -->
     <model-viewer 
         id="my-model"
-        src="https://billy5986.github.io/model/nailoong/nailoong.glb" 
+        src="model/nailoong.glb" 
         camera-controls 
         auto-rotate 
         shadow-intensity="1.5"
